@@ -1,0 +1,46 @@
+{
+    "HNI": {
+        "ofstime_less_1": {
+            "conservative": 0,
+            "moderate": 0,
+            "aggressive": 0
+        },
+        "ofstime_gte_1_diff_lt_5": {
+            "conservative": 0,
+            "moderate": 1.0,
+            "aggressive": 1.5
+        },
+        "ofstime_gte_1_diff_gte_5_ofstime_gt_2": {
+            "conservative": 0.1,
+            "moderate": 0.15,
+            "aggressive": 0.45
+        },
+        "ofstime_gte_1_diff_gte_5_ofstime_lte_2": {
+            "conservative": -0.25,
+            "moderate": 0.10,
+            "aggressive": 0.20
+        }
+    },
+    "OTHER": {
+        "ofstime_less_1": {
+            "conservative": 0,
+            "moderate": 0,
+            "aggressive": 0
+        },
+        "ofstime_gte_1_diff_lt_5": {
+            "conservative": -0.25,
+            "moderate": 0,
+            "aggressive": 0.3
+        },
+        "ofstime_gte_1_diff_gte_5_ofstime_gt_2": {
+            "conservative": -0.1,
+            "moderate": 0.15,
+            "aggressive": 0.45
+        },
+        "ofstime_gte_1_diff_gte_5_ofstime_lte_2": {
+            "conservative": -0.15,
+            "moderate": 0,
+            "aggressive": 0.3
+        }
+    }
+}

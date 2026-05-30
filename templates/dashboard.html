@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Active OFS Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0f172a;
+            color: #e2e8f0;
+        }
+        .glass-card {
+            background: #1e293b;
+            border: 1px solid #334155;
+            transition: all 0.3s ease;
+        }
+        .glass-card:hover {
+            border-color: #3b82f6;
+            transform: translateY(-4px);
+            box-shadow: 0 10px 25px -5px rgba(59, 130, 246, 0.2), 0 8px 10px -6px rgba(59, 130, 246, 0.1);
+        }
+    </style>
+</head>
+<body class="min-h-screen">
+    <!-- Navbar -->
+    <nav class="bg-slate-900 border-b border-slate-700 p-4 sticky top-0 z-50">
+        <div class="container mx-auto flex justify-between items-center">
+            <div class="text-xl font-bold text-white tracking-wider">OFS PORTAL</div>
+            <div class="space-x-4">
+                {% if role == 'admin' %}
+                <a href="/admin" class="px-4 py-2 text-sm font-medium text-blue-400 hover:text-white transition-colors">Admin Panel</a>
+                {% endif %}
+                <a href="/logout" class="px-4 py-2 text-sm font-medium text-slate-300 hover:text-white transition-colors bg-slate-800 hover:bg-slate-700 rounded-md">Logout</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container mx-auto p-6 mt-8">
+        <div class="flex justify-between items-center mb-8">
+            <h1 class="text-3xl font-bold text-white">Active Offers For Sale</h1>
+            <p class="text-slate-400">Select an OFS to view live bidding details.</p>
+        </div>
+
+        {% if ofs_list %}
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {% for ofs in ofs_list %}
+            <div class="glass-card rounded-xl p-6 flex flex-col justify-between">
+                <div>
+                    <div class="flex justify-between items-start mb-4">
+                        <h2 class="text-xl font-bold text-blue-400 line-clamp-2" title="{{ ofs['ofs_name'] }}">{{ ofs['ofs_name'] }}</h2>
+                        <span class="bg-green-500/20 text-green-400 text-xs font-semibold px-2.5 py-1 rounded-full border border-green-500/30">Active</span>
+                    </div>
+                    
+                    <div class="space-y-3 mb-6">
+                        <div class="flex justify-between text-sm">
+                            <span class="text-slate-400">Symbol:</span>
+                            <span class="font-medium text-white">{{ ofs['symbol'] }}</span>
+                        </div>
+                        <div class="flex justify-between text-sm">
+                            <span class="text-slate-400">Category:</span>
+                            <span class="font-medium text-white">{{ ofs['category'] }}</span>
+                        </div>
+                        <div class="flex justify-between text-sm">
+                            <span class="text-slate-400">Floor Price:</span>
+                            <span class="font-medium text-white">₹{{ ofs['floor_price'] }}</span>
+                        </div>
+                        <div class="flex justify-between text-sm">
+                            <span class="text-slate-400">Base Qty:</span>
+                            <span class="font-medium text-white">{{ "{:,}".format(ofs['base_quantity']) }}</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <a href="/ofs/{{ ofs['id'] }}" class="w-full block text-center bg-blue-600 hover:bg-blue-500 text-white font-semibold py-3 px-4 rounded-lg transition-colors shadow-lg shadow-blue-600/20">
+                    View Dashboard &rarr;
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <div class="text-center py-20 bg-slate-800/50 rounded-2xl border border-slate-700">
+            <svg class="mx-auto h-12 w-12 text-slate-500 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4" />
+            </svg>
+            <h3 class="text-lg font-medium text-white">No Active OFS</h3>
+            <p class="mt-1 text-sm text-slate-400">There are currently no active offers available.</p>
+        </div>
+        {% endif %}
+    </main>
+</body>
+</html>

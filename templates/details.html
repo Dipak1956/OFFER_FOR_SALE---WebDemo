@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Details Page</title>
+</head>
+<body>
+    <marquee
+    style="background-color: #e48826;color: white;height:auto;padding-top: 8px;font-size: 25px;position: fixed;top: 0;">
+    ARHAM GROUP OF COMPANIES</marquee>
+
+    <br>
+    <br>
+
+    <div class="column">
+        <table>
+            <tbody>
+                <tr>
+                    <th style='font-size: 23px; text-align:left'><strong>Price</strong></th>
+                    <td class="PriText" style="font-size: 23px;"><strong>Qty</strong></td>
+                </tr>
+                <tr>
+                    <th style='text-align:left' style="font-size: 23px;"><span id="max_all_price"></span></th>
+                    <td class="PriText" style="font-size: 23px;"><span id="max_all_quan"></span></td>
+                </tr>
+                <tr>
+                    <th style='text-align:left;' style="font-size: 23px;"><span id="max_all_price1"></span></th>
+                    <td class="PriText" style="font-size: 23px;"><span id="max_all_quan1"></span></td>
+                </tr>
+                <tr>
+                    <th style='text-align:left' style="font-size: 23px;"><span id="max_all_price2"></span></th>
+                    <td class="PriText" style="font-size: 23px;"><span id="max_all_quan2"></span></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <marquee
+    style="background-color: #e48826;color: white;height: auto;padding-top: 8px;font-size: 25px;position: fixed;bottom: 0px;">
+    Contact Details: 72288 82088 | Email ID: arhamtechnologyindia@gmail.com</marquee>
+    <!-- add more fields as needed -->
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const data = JSON.parse(localStorage.getItem('detailsData'));
+        if (data) {
+            document.getElementById('ofsName').textContent = data.ofsName;
+            document.getElementById('category').textContent = data.category;
+            // populate more fields
+        } else {
+            alert("No data found!");
+        }
+    });
+    </script>
+</body>
+</html>
